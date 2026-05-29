@@ -91,7 +91,7 @@ AI_Career_Guidance/
 
 1️⃣ Clone the repository
 
-git clone https://github.com/Satnaam-coder/AI_Career_Guide.git
+git clone https://github.com/Priti-Tayde/AI_Career_Guide.git
 cd AI_Career_Guide
 
 2️⃣ Create virtual environment
@@ -133,7 +133,7 @@ Password: admin123
 ---
 👩‍💻 Author
 
-Dimple
+Priti
 
 ---
 
