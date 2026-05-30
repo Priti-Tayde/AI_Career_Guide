@@ -3,7 +3,7 @@ import sqlite3
 DB_FILE = "career_guide.db"
 
 def create_tables():
-    conn = sqlite3.connect(DB_FILE)
+    conn = sqlite3.connect("career_guide.db")
     cur = conn.cursor()
 
     cur.execute("""
@@ -17,9 +17,22 @@ def create_tables():
     conn.commit()
     conn.close()
 
+def save_resume_analysis(username, score, skills):
+    conn = sqlite3.connect("career_guide.db")
+    cur = conn.cursor()
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS resume_analysis(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT,
+        score REAL,
+        skills TEXT
+    )
+    """)
+
 
 def register_user(username, password):
-    conn = sqlite3.connect(DB_FILE)
+    conn = sqlite3.connect("career_guide.db")
     cur = conn.cursor()
 
     try:
@@ -36,7 +49,7 @@ def register_user(username, password):
 
 
 def login_user(username, password):
-    conn = sqlite3.connect(DB_FILE)
+    conn = sqlite3.connect("career_guide.db")
     cur = conn.cursor()
 
     cur.execute(
