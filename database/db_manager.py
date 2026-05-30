@@ -30,6 +30,17 @@ def save_resume_analysis(username, score, skills):
     )
     """)
 
+    cur.execute(
+        """
+        INSERT INTO resume_analysis(username, score, skills)
+        VALUES (?, ?, ?)
+        """,
+        (username, score, skills)
+    )
+
+    conn.commit()
+    conn.close()
+
 
 def register_user(username, password):
     conn = sqlite3.connect("career_guide.db")
