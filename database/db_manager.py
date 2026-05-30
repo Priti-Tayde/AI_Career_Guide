@@ -48,3 +48,4 @@ def login_user(username, password):
     conn.close()
 
     return user is not None
+
