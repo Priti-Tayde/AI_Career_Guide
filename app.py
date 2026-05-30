@@ -189,7 +189,7 @@ if st.session_state.user == "admin":
 
     st.markdown("## 👨‍💻 Admin Dashboard")
 
-    conn = sqlite3.connect("database/career_guide.db")
+    conn = sqlite3.connect("career_guide.db")
 
     # 👤 Users table
     users_df = pd.read_sql("SELECT * FROM users", conn)
@@ -197,7 +197,7 @@ if st.session_state.user == "admin":
     st.dataframe(users_df)
 
     # 📊 Resume Analysis table
-    analysis_df = pd.read_sql("SELECT * FROM resume_analysis", conn)
+    analysis_df = pd.read_sql("SELECT * FROM save_resume_analysis", conn)
     st.subheader("📊 Resume Analysis Data")
     st.dataframe(analysis_df)
 
