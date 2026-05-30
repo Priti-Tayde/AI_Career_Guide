@@ -1,42 +1,50 @@
 import sqlite3
 
-DB_NAME = "career_guide.db"
-
-def register_user(username, password):
-    # insert user into database
-    pass
-
-def login_user(username, password):
-    # validate user
-    pass
-   
+DB_FILE = "career_guide.db"
 
 def create_tables():
-    conn = sqlite3.connect(DB_NAME)
-    cursor = conn.cursor()
+    conn = sqlite3.connect(DB_FILE)
+    cur = conn.cursor()
 
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS users (
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT,
+        username TEXT UNIQUE,
         password TEXT
-        )
-    """ )
+    )
+    """)
 
     conn.commit()
     conn.close()
 
-    print("Tables created")
 
-def save_resume_analysis(user_id, resume_text, analysis):
-    conn = sqlite3.connect(DB_NAME)
-    cursor = conn.cursor()
+def register_user(username, password):
+    conn = sqlite3.connect(DB_FILE)
+    cur = conn.cursor()
 
-    cursor.execute("""
-         INSERT INTO resume_analysis
-         (user_id, resume_text, analysis)
-        VALUES (?, ?, ?)
-     """, (user_id, resume_text, analysis))
+    try:
+        cur.execute(
+            "INSERT INTO users(username,password) VALUES(?,?)",
+            (username, password)
+        )
+        conn.commit()
+        return True
+    except:
+        return False
+    finally:
+        conn.close()
 
-    conn.commit()
-    conn.close()  
+
+def login_user(username, password):
+    conn = sqlite3.connect(DB_FILE)
+    cur = conn.cursor()
+
+    cur.execute(
+        "SELECT * FROM users WHERE username=? AND password=?",
+        (username, password)
+    )
+
+    user = cur.fetchone()
+    conn.close()
+
+    return user is not None
